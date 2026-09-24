@@ -11,7 +11,7 @@
     <StartupObject>CodexPad.Program</StartupObject>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
-    <Version>0.3.0</Version>
+    <Version>0.3.1</Version>
     <Product>CodexPad</Product>
     <Description>Community macropad companion for Windows</Description>
     <ApplicationIcon Condition="Exists('assets/codexpad.ico')">assets/codexpad.ico</ApplicationIcon>

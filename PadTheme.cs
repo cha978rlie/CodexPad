@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -8,6 +9,16 @@ namespace CodexPad
 {
     internal static class PadTheme
     {
+        private static readonly Dictionary<string, Bitmap> buttonGlyphs = new Dictionary<string, Bitmap>();
+        public static Bitmap ButtonGlyph(string kind, Color color, int size)
+        {
+            string key = kind + ":" + color.ToArgb() + ":" + size;
+            if (!buttonGlyphs.TryGetValue(key, out var glyph)) {
+                glyph = Glyph(kind, color, size);
+                buttonGlyphs.Add(key, glyph);
+            }
+            return glyph;
+        }
         public static readonly Color Background = Color.FromArgb(14, 18, 25);
         public static readonly Color Surface = Color.FromArgb(23, 29, 39);
         public static readonly Color Raised = Color.FromArgb(31, 39, 51);
@@ -118,14 +129,14 @@ namespace CodexPad
             using var path = PadTheme.Round(rect, 8);
             Color fill = Primary ? PadTheme.Accent : Selected ? Color.FromArgb(29, 66, 65) : hover ? PadTheme.Raised : BackColor;
             using var brush = new SolidBrush(fill); e.Graphics.FillPath(brush, path);
-            using var border = new Pen(Selected || Focused ? PadTheme.Accent : PadTheme.Border); e.Graphics.DrawPath(border, path);
+            using var border = new Pen(Selected ? PadTheme.Accent : PadTheme.Border); e.Graphics.DrawPath(border, path);
             Color text = !Enabled ? PadTheme.Muted : Primary ? PadTheme.Background : Selected ? PadTheme.Accent : ForeColor;
             int size = (int)(20 * DeviceDpi / 96f), gap = (int)(10 * DeviceDpi / 96f);
             bool icon = Symbol.Length > 0;
             var textSize = TextRenderer.MeasureText(Text, Font);
             int groupWidth = textSize.Width + (icon ? size + gap : 0);
             int x = Math.Max(10, (Width - groupWidth) / 2);
-            if (icon) { using var glyph = PadTheme.Glyph(Symbol, text, size); e.Graphics.DrawImage(glyph, x, (Height - size) / 2); x += size + gap; }
+            if (icon) { e.Graphics.DrawImage(PadTheme.ButtonGlyph(Symbol, text, size), x, (Height - size) / 2); x += size + gap; }
             TextRenderer.DrawText(e.Graphics, Text, Font, new Rectangle(x, 0, Width - x - 6, Height), text,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Left | TextFormatFlags.EndEllipsis | TextFormatFlags.NoPrefix);
         }

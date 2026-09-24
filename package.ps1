@@ -1,6 +1,6 @@
 param([string]$OutputDirectory = (Join-Path $PSScriptRoot 'dist'))
 $ErrorActionPreference = 'Stop'
-$version = '0.3.0'
+$version = '0.3.1'
 $pythonVersion = '3.13.15'
 $pythonHash = 'D1F04D990AEE1253D8569E8E5104E30FA9F5FA830899F14843448872D936A2CF'
 $stageRoot = Join-Path $PSScriptRoot ('.build\package-' + [guid]::NewGuid().ToString('N'))

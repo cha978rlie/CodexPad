@@ -13,11 +13,11 @@ Python, .NET und die benötigten Programmdateien sind im Windows-ZIP enthalten. 
 
 ## 2. Die richtige Datei herunterladen
 
-Öffne die [Release-Seite](https://github.com/cha978rlie/CodexPad/releases/tag/v0.3.0) und lade unter **Assets** die Datei **CodexPad-0.3.0-win-x64.zip** herunter.
+Öffne die [Release-Seite](https://github.com/cha978rlie/CodexPad/releases/tag/v0.3.1) und lade unter **Assets** die Datei **CodexPad-0.3.1-win-x64.zip** herunter.
 
-**Source code** und **CodexPad-0.3.0-source.zip** enthalten den Quellcode für Entwickler. Zum normalen Starten brauchst du das **win-x64.zip**.
+**Source code** und **CodexPad-0.3.1-source.zip** enthalten den Quellcode für Entwickler. Zum normalen Starten brauchst du das **win-x64.zip**.
 
-**Versionshinweis:** Der veröffentlichte Windows-Download 0.3.0 verwendet für Benachrichtigungen fest Modus 1. Die nachträglich ergänzte Auswahl zwischen Modus 1 und 2 ist derzeit im aktuellen Quellcode enthalten, aber noch nicht in diesem Download. Auch die Screenshots im aktuellen Repository können bereits die neuere Oberfläche zeigen.
+**Versionshinweis:** Der Windows-Download 0.3.1 enthält die Auswahl zwischen LED-Modus 1 und 2. Bei bestehenden Installationen bleibt die bisherige Auswahl erhalten.
 
 ## 3. Entpacken und starten
 
@@ -45,7 +45,7 @@ Das Öffnen des Eingabetests pausiert die normale Tastensteuerung. Danach auf de
 
 ## 5. Belegung einschalten
 
-Unter **Belegung** kannst du die Standardaktionen behalten oder ändern:
+Unter **Belegung** kannst du die Standardaktionen behalten oder ändern. Die kurze Anzeige des geöffneten Aufgabentitels ist optional und bei neuen Installationen zunächst ausgeschaltet:
 
 | Eingabe | Standardaktion |
 |---|---|
@@ -67,7 +67,7 @@ Unter **Belegung** sind diese Optionen bei einer neuen Installation zunächst au
 - **Tasten beim Programmstart aktivieren:** Die Tastensteuerung beim Öffnen automatisch einschalten.
 - **Mit Windows im Hintergrund starten:** CodexPad bei der Windows-Anmeldung starten.
 
-Die gewünschten Häkchen setzen und **Übernehmen** anklicken. Für den täglichen Betrieb ohne manuelles Einschalten sind die beiden Startoptionen gemeinsam sinnvoll.
+Den gewünschten LED-Modus unter **Benachrichtigungseffekt** wählen. Beide Modi lassen sich unter **Gerät & Hilfe** für zehn Sekunden testen. Die gewünschten Häkchen setzen und **Übernehmen** anklicken. Für den täglichen Betrieb ohne manuelles Einschalten sind die beiden Startoptionen gemeinsam sinnvoll.
 
 **X** versteckt das Fenster. CodexPad läuft im Hintergrund weiter. Zum Öffnen das Symbol im Infobereich neben der Uhr doppelt anklicken (gegebenenfalls unter dem kleinen Pfeil für ausgeblendete Symbole) oder CodexPad.exe nochmals starten. Vollständig beenden: Rechtsklick auf das Symbol → **Beenden**.
 
@@ -88,6 +88,6 @@ Zum Weitergeben das unveränderte Release-ZIP verwenden. Der bereits benutzte Pr
 | LED bleibt aus | LED-Option einschalten und übernehmen; Status auf der Übersicht ansehen; LED-Test unter **Gerät & Hilfe** nutzen. |
 | „Status unbekannt“ | Die lokale Codex-Statusquelle ist nicht zuverlässig verfügbar. Nach 15 Sekunden wird die LED ausgeschaltet. |
 | Nur eine EXE kopiert / Dateien fehlen | Das vollständige Windows-ZIP erneut in einen eigenen Ordner entpacken. |
-| Die LED-Modus-Auswahl fehlt | Der Download 0.3.0 enthält sie noch nicht; siehe Versionshinweis oben. |
+| Die LED-Modus-Auswahl fehlt | Prüfen, ob tatsächlich der Windows-Download 0.3.1 entpackt wurde. |
 
 Weitere Grenzen stehen im [README](../README.md). Für einen Fehlerbericht genügen zunächst App-Version, Windows-Version, Pad-Modell und eine kurze Beschreibung. Keine privaten Aufgabenprotokolle oder vollständigen Codex-Datenbanken öffentlich hochladen.

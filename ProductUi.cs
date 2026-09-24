@@ -233,7 +233,7 @@ namespace CodexPad
                     OpenLink(ThreadLink(task.id)); await Task.Delay(180);
                     bool focused = FocusChatGpt() != IntPtr.Zero;
                     Note(focused ? "Aufgabe geöffnet." : "Aufgabe geöffnet; Windows hat den Fokuswechsel nicht bestätigt.");
-                    if (config.ShowTaskNotice) ShowTaskToast(task.title);
+                    if (config.ShowTaskNotice) ShowTaskToast(TaskTitle.ForDisplay(task.title));
                     return;
                 }
                 ExecuteLegacy(binding);
@@ -261,7 +261,7 @@ namespace CodexPad
                 appState.Text = FindChatWindow() != IntPtr.Zero ? "Codex/Work erreichbar · lokale Aufgaben" : "Codex/Work-Fenster nicht gefunden";
                 var pending = current.tasks.Where(t => t.unread && t.status == "completed").ToList();
                 unreadTasks.BeginUpdate(); unreadTasks.Items.Clear();
-                foreach (var t in pending) unreadTasks.Items.Add("Ungelesenes Ergebnis · " + t.title);
+                foreach (var t in pending) unreadTasks.Items.Add("Ungelesenes Ergebnis · " + TaskTitle.ForDisplay(t.title));
                 if (pending.Count == 0) unreadTasks.Items.Add(current.led_known ? "Keine fertigen ungelesenen Ergebnisse." : "Lesestatus oder Aufgabenstatus derzeit nicht vollständig verfügbar.");
                 unreadTasks.EndUpdate();
                 int desired = ledPolicy.Desired(config.CompletionLed, current.led_known, pending.Count > 0, DateTime.UtcNow, config.NotificationLedMode);

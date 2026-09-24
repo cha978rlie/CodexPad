@@ -26,7 +26,7 @@ namespace CodexPad
     public sealed class Config
     {
         public int Version { get; set; } = 1;
-        public bool ShowTaskNotice { get; set; } = true;
+        public bool ShowTaskNotice { get; set; } = false;
         public List<Binding> Bindings { get; set; } = new List<Binding>();
         public bool SendWithControlEnter { get; set; } = false;
         public bool AutoStartWithWindows { get; set; } = false;
@@ -142,6 +142,7 @@ namespace CodexPad
             windowTimer.Start();
             Shown += (sender, args) => {
                 if (previewMode) return;
+                BeginInvoke(new Action(PreparePages));
                 if (initialConfigError != null) Note("Einstellungen nicht geladen; Original unverändert: " + initialConfigError);
                 if (config.ActivateOnLaunch) StartListening(false);
                 statusTimer.Interval = 3000;

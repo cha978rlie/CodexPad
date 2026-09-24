@@ -18,8 +18,27 @@ namespace CodexPad
         private readonly string[] controlNames = { "Taste links", "Taste Mitte", "Taste rechts", "Drehen links", "Drehen rechts", "Drehrad drücken" };
         private void SelectPage(int index)
         {
-            for (int i = 0; i < 3; i++) { pages[i].Visible = i == index; navigation[i].Selected = i == index; navigation[i].Invalidate(); }
+            var parent = pages[index].Parent;
+            parent.SuspendLayout();
+            for (int i = 0; i < 3; i++) {
+                pages[i].Visible = i == index;
+                navigation[i].Selected = i == index;
+                navigation[i].Invalidate();
+            }
             pages[index].BringToFront();
+            parent.ResumeLayout(true);
+        }
+        private static void PrepareControls(Control parent)
+        {
+            foreach (Control child in parent.Controls) {
+                _ = child.Handle;
+                PrepareControls(child);
+            }
+        }
+        internal void PreparePages()
+        {
+            PrepareControls(pages[1]);
+            PrepareControls(pages[2]);
         }
         private Label TextLabel(string text, float size = 10, bool bold = false, bool muted = false)
             => new Label { Text = text, AutoSize = false, Dock = DockStyle.Fill, ForeColor = muted ? PadTheme.Muted : PadTheme.Text,
@@ -52,7 +71,7 @@ namespace CodexPad
             var brand = new TableLayoutPanel { Dock = DockStyle.Top, Height = 85, ColumnCount = 2, RowCount = 2 };
             brand.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 42)); brand.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             var logo = new PictureBox { Image = PadTheme.Glyph("pad", PadTheme.Accent, 34), Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.CenterImage };
-            brand.Controls.Add(logo); brand.Controls.Add(TextLabel("CodexPad", 17, true));
+            brand.Controls.Add(logo); brand.Controls.Add(TextLabel("CodexPad", 14, true));
             var sub = TextLabel("DEIN PAD. DEIN WORKFLOW.", 7.8f, muted: true); brand.Controls.Add(sub, 0, 1); brand.SetColumnSpan(sub, 2);
             var nav = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 182, FlowDirection = FlowDirection.TopDown, WrapContents = false, Padding = new Padding(0, 12, 0, 0) };
             string[] names = { "Übersicht", "Belegung", "Gerät & Hilfe" }, icons = { "pad", "key", "settings" };
@@ -60,7 +79,7 @@ namespace CodexPad
                 int page = i; navigation[i] = new PadButton { Text = names[i], Symbol = icons[i], Width = 175, Height = 44, Margin = new Padding(0, 0, 0, 10) };
                 navigation[i].Click += (s, e) => SelectPage(page); nav.Controls.Add(navigation[i]);
             }
-            var footer = TextLabel("WINDOWS · LOKAL\n0.3.0 Preview\n\nCommunity-Projekt\nKeine offizielle OpenAI-App", 8.5f, muted: true); footer.Dock = DockStyle.Bottom; footer.Height = 100;
+            var footer = TextLabel("WINDOWS · LOKAL\n0.3.1 Preview\n\nCommunity-Projekt\nKeine offizielle OpenAI-App", 8.5f, muted: true); footer.Dock = DockStyle.Bottom; footer.Height = 100;
             rail.Controls.Add(nav); rail.Controls.Add(brand); rail.Controls.Add(footer); shell.Controls.Add(rail);
             var main = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, ColumnCount = 1, Padding = new Padding(24, 22, 24, 14), Margin = new Padding(0) };
             main.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); main.RowStyles.Add(new RowStyle(SizeType.Absolute, 44));

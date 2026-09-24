@@ -10,6 +10,16 @@ using System.Windows.Forms;
 
 namespace CodexPad
 {
+    internal static class TaskTitle
+    {
+        public static string ForDisplay(string title)
+        {
+            string value = (title ?? "").Replace('\r', ' ').Replace('\n', ' ').Trim();
+            if (value.Length == 0 || value.Contains("http://", StringComparison.OrdinalIgnoreCase) ||
+                value.Contains("https://", StringComparison.OrdinalIgnoreCase)) return "Aufgabe geöffnet";
+            return value.Length > 90 ? value.Substring(0, 89) + "…" : value;
+        }
+    }
     internal static class DictationSelection
     {
         public static bool InComposerArea(double x, double y, double width, double height,

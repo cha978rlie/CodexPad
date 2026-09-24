@@ -38,6 +38,7 @@ namespace CodexPad
                     using (var form = new PadForm(config, false, true)) {
                         form.Show();
                         Application.DoEvents();
+                        form.PreparePages();
                         if (args.Contains("--bindings")) form.SelectBindingsForPreview();
                         Application.DoEvents();
                         using (var image = new Bitmap(form.Width, form.Height)) {

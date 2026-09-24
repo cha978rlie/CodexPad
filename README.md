@@ -6,7 +6,7 @@
 
 CodexPad verbindet ein USB-Macropad mit Codex/Work auf Windows: Aufgaben wechseln, diktieren, Nachrichten senden, scrollen und eigene Tastenkürzel auslösen. Die App läuft lokal im Hintergrund.
 
-**0.3.0 Preview · Windows x64 · MIT**
+**0.3.1 Preview · Windows x64 · MIT**
 
 Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstützt; kein Ersatz für die offizielle Codex-Micro-Hardware.
 
@@ -19,7 +19,7 @@ Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstüt
 - **Aufgaben durchschalten:** zuerst fertige ungelesene, dann laufende Aufgaben; zuletzt verwendete als Ersatz.
 - **Diktat umschalten:** direkt über „Diktieren“ und „Diktat beenden“ im Nachrichtenfeld.
 - **Zwei Scrollvarianten:** normales Mausrad oder gezielt im Codex-Chat, ohne den Zeiger zu verschieben.
-- **LED-Ergebnisanzeige:** eingebauter Effekt, solange fertige Ergebnisse ungelesen sind.
+- **LED-Ergebnisanzeige:** Modus 1 oder 2 wählen, solange fertige Ergebnisse ungelesen sind.
 - **Hintergrundbetrieb:** X versteckt die App. Erneutes Starten zeigt dieselbe Instanz.
 - **Sichern und übertragen:** Einstellungen importieren/exportieren; Sicherung vor jeder Übernahme.
 
@@ -27,9 +27,9 @@ Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstüt
 
 **Neu hier? → [Schritt-für-Schritt-Anleitung für deinen PC](docs/ERSTE-SCHRITTE.md)**
 
-[Windows-App herunterladen](https://github.com/cha978rlie/CodexPad/releases/download/v0.3.0/CodexPad-0.3.0-win-x64.zip) · Vollständig entpacken und `CodexPad.exe` öffnen.
+[Windows-App herunterladen](https://github.com/cha978rlie/CodexPad/releases/download/v0.3.1/CodexPad-0.3.1-win-x64.zip) · Vollständig entpacken und `CodexPad.exe` öffnen.
 
-**Hinweis:** Der Windows-Download 0.3.0 enthält noch keine LED-Modus-Auswahl. Diese ist bereits im aktuellen Quellcode enthalten.
+**Neu in 0.3.1:** LED-Modus 1 oder 2 auswählen; ruhigeres Design und eine schnellere Belegungsseite. Die optionale Aufgaben-Einblendung ist bei neuen Installationen ausgeschaltet.
 
 1. Das Windows-ZIP vollständig in einen beschreibbaren Ordner entpacken, z. B. unter Dokumente. Nicht direkt im ZIP starten.
 2. `CodexPad.exe` öffnen. Python und .NET sind im Paket enthalten. Es ist kein zusätzlicher Treiber nötig.

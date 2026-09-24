@@ -45,6 +45,8 @@ namespace CodexPad
             Check(led.Desired(true, true, true, now, 2) == 2, "Modus 2 bei ungelesenem Ergebnis");
             Check(led.Desired(true, false, false, now.AddSeconds(1), 1) == 1, "Effektwechsel während kurzer Statuslücke");
             Check(led.Desired(true, true, false, now.AddSeconds(2), 2) == 0, "Modus 2 nach Lesen aus");
+            Check(TaskTitle.ForDisplay("[Amazon](https://www.amazon.de/dp/B0GC97ZT4M)") == "Aufgabe geöffnet",
+                "Langer Link erscheint nicht als Aufgabenhinweis");
             Check(Shortcut.Parse("Strg+D").SequenceEqual(new byte[] { 0x11, 0x44 }), "Strg D");
             Check(Shortcut.Parse("Enter").SequenceEqual(new byte[] { 13 }), "Einfaches Enter");
             Check(Shortcut.Parse("F19").SequenceEqual(new byte[] { 0x82 }), "Drehrad-Ausgabe F19");
