@@ -66,15 +66,16 @@ namespace CodexPad
     {
         private DateTime? unknownSince;
         private int desired;
-        public int Desired(bool enabled, bool known, bool unreadCompleted, DateTime now)
+        public int Desired(bool enabled, bool known, bool unreadCompleted, DateTime now, int mode = 1)
         {
+            if (mode != 1 && mode != 2) throw new ArgumentException("LED-Modus muss 1 oder 2 sein.");
             if (!enabled) { desired = 0; unknownSince = null; return 0; }
             if (known) { unknownSince = null; desired = unreadCompleted ? 1 : 0; }
             else {
                 unknownSince ??= now;
                 if ((now - unknownSince.Value).TotalSeconds >= 15) desired = 0;
             }
-            return desired;
+            return desired == 0 ? 0 : mode;
         }
     }
 
@@ -86,6 +87,7 @@ namespace CodexPad
             var value = JsonSerializer.Deserialize<Config>(File.ReadAllText(path));
             if (value == null || value.Bindings == null || value.Bindings.Count != 6)
                 throw new InvalidDataException("Die Datei muss genau sechs Belegungen enthalten.");
+            if (value.NotificationLedMode != 1 && value.NotificationLedMode != 2) throw new InvalidDataException("LED-Modus muss 1 oder 2 sein.");
             if (value.Version > 2) throw new InvalidDataException("Diese Einstellungen stammen aus einer neueren Programmversion.");
             if (value.Version < 2) {
                 // Agreed upgrade: only replace the old left-button 'latest' action.

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -32,6 +32,7 @@ namespace CodexPad
         public bool AutoStartWithWindows { get; set; } = false;
         public bool ActivateOnLaunch { get; set; } = false;
         public bool CompletionLed { get; set; } = false;
+        public int NotificationLedMode { get; set; } = 1;
     }
 
     internal sealed class Choice

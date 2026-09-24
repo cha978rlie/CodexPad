@@ -42,6 +42,9 @@ namespace CodexPad
             Check(led.Desired(true, false, false, now.AddSeconds(16)) == 0, "Nach 15 Sekunden unbekannt aus");
             Check(led.Desired(true, true, true, now.AddSeconds(17)) == 1, "Erholung nach Ausfall");
             Check(led.Desired(false, true, true, now) == 0, "Deaktivierung schaltet aus");
+            Check(led.Desired(true, true, true, now, 2) == 2, "Modus 2 bei ungelesenem Ergebnis");
+            Check(led.Desired(true, false, false, now.AddSeconds(1), 1) == 1, "Effektwechsel während kurzer Statuslücke");
+            Check(led.Desired(true, true, false, now.AddSeconds(2), 2) == 0, "Modus 2 nach Lesen aus");
             Check(Shortcut.Parse("Strg+D").SequenceEqual(new byte[] { 0x11, 0x44 }), "Strg D");
             Check(Shortcut.Parse("Enter").SequenceEqual(new byte[] { 13 }), "Einfaches Enter");
             Check(Shortcut.Parse("F19").SequenceEqual(new byte[] { 0x82 }), "Drehrad-Ausgabe F19");
@@ -57,10 +60,13 @@ namespace CodexPad
                 var config = SettingsStore.Read(file);
                 Check(config.Version == 2 && config.Bindings[0].Action == "cycle", "Gezielte Migration links");
                 Check(config.Bindings[2].Action == "enter" && config.Bindings[5].Action == "effortMenu" && config.CompletionLed, "Bestehende Belegung erhalten");
+                Check(config.NotificationLedMode == 1, "Alte Einstellungen behalten Modus 1");
+                config.NotificationLedMode = 2;
                 var draft = SettingsStore.Copy(config); draft.Bindings[0].Action = "shortcut";
                 Check(config.Bindings[0].Action == "cycle", "Entwurf verändert aktive Einstellungen nicht");
                 SettingsStore.Write(file, config);
                 Check(Directory.GetFiles(Path.Combine(dir, "Einstellungen-Sicherungen")).Length == 1, "Sicherung vor Übernahme");
+                Check(SettingsStore.Read(file).NotificationLedMode == 2, "LED-Auswahl bleibt beim Speichern erhalten");
                 Check(SettingsStore.Read(file).Bindings[2].Action == "enter", "Export und Import erhalten einfaches Enter");
             } finally { Directory.Delete(dir, true); }
             return "OK: " + count + " Prüfungen (Aufgabenrunde, LED, Tastenkürzel, Migration und Sicherung).";

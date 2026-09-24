@@ -62,7 +62,13 @@ Die Aufgabenrunde bleibt während des Durchschaltens stabil. Nach zehn Sekunden 
 
 Die LED signalisiert, dass mindestens eine erfasste lokale Aufgabe fertig und ungelesen ist. Sie geht aus, wenn alle betreffenden Ergebnisse gelesen wurden – auch beim Öffnen per Maus. Der Status wird ungefähr alle drei Sekunden geprüft. Bei anhaltend unbekannten Daten wird nach 15 Sekunden abgeschaltet.
 
-Es werden ausschließlich eingebaute Firmwareeffekte verwendet. Modus 1 ist ein tastenabhängiger Farbeffekt mit anschließendem Abdunkeln. Einzelne LED-Farben sind nicht frei steuerbar. Im laufenden Betrieb wird kein separater Flash-Speicherbefehl gesendet.
+Unter **Belegung → Benachrichtigungseffekt** kann Modus 1 oder 2 ausgewählt und mit **Übernehmen** gespeichert werden. Bestehende Einstellungen verwenden weiterhin Modus 1. Unter **Gerät & Hilfe** lassen sich beide Modi jeweils zehn Sekunden testen.
+
+- **Modus 0:** LEDs aus; wird automatisch nach dem Lesen verwendet.
+- **Modus 1:** tastenabhängiger Farbeffekt mit anschließendem Abdunkeln.
+- **Modus 2:** LEDs leuchten nacheinander.
+
+Es werden ausschließlich eingebaute Firmwareeffekte verwendet. Einzelne LED-Farben sind nicht frei steuerbar. Im laufenden Betrieb wird kein separater Flash-Speicherbefehl gesendet.
 
 ## Grenzen der Preview
 

@@ -9,6 +9,7 @@ namespace CodexPad
 {
     public sealed partial class PadForm
     {
+        private readonly ComboBox notificationLedMode = new PadCombo();
         private readonly Panel[] pages = new Panel[3];
         private readonly PadButton[] navigation = new PadButton[3];
         private readonly PictureBox[] actionIcons = new PictureBox[6];
@@ -149,6 +150,12 @@ namespace CodexPad
             completionLed.Text = "LED für fertige, ungelesene Ergebnisse"; showTaskNotice.Text = "Aufgabennamen beim Wechseln kurz anzeigen";
             controlEnter.Text = "Bei „Sicher senden“ Strg+Enter statt Enter verwenden";
             foreach (var box in new[] { autoStart, activateOnLaunch, completionLed, showTaskNotice, controlEnter }) { box.AutoSize = true; box.ForeColor = PadTheme.Text; box.Font = PadTheme.UiFont(9.5f); box.Margin = new Padding(2, 3, 2, 3); options.Controls.Add(box); }
+            var ledOptions = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = new Padding(0, 3, 0, 3) };
+            ledOptions.Controls.Add(new Label { Text = "Benachrichtigungseffekt", AutoSize = true, ForeColor = PadTheme.Text, Font = PadTheme.UiFont(9.5f), Margin = new Padding(2, 7, 12, 0) });
+            notificationLedMode.DropDownStyle = ComboBoxStyle.DropDownList;
+            notificationLedMode.Items.AddRange(new object[] { "Modus 1 · Ruhiger Farbeffekt", "Modus 2 · LEDs nacheinander" });
+            notificationLedMode.Width = 300; notificationLedMode.Font = PadTheme.UiFont(9.5f); PadTheme.StyleCombo(notificationLedMode);
+            ledOptions.Controls.Add(notificationLedMode); options.Controls.Add(ledOptions);
             editor.Controls.Add(options);
             var expert = new FlowLayoutPanel { Dock = DockStyle.Top, AutoSize = true, Visible = false, Margin = new Padding(0, 0, 0, 8), BackColor = PadTheme.Surface, Padding = new Padding(8) };
             var explanation = TextLabel("Nur für andere Hardware: Diese Signale empfängt die App vom Pad. Normalerweise F13–F18 unverändert lassen.", 9, muted: true); explanation.Height = 40; explanation.Width = 750; explanation.Dock = DockStyle.None; expert.Controls.Add(explanation); expert.SetFlowBreak(explanation, true);
@@ -178,7 +185,7 @@ namespace CodexPad
             AddButton(deviceButtons, "Eingaben testen", () => { StopListening(); LaunchHelper("PadTest.ps1", false); }); layout.Controls.Add(deviceButtons);
             layout.Controls.Add(TextLabel("LED-TEST\nDer Effekt läuft zehn Sekunden. Danach übernimmt wieder die Automatik.\nDas Pad unterstützt eingebaute Effekte, keine frei wählbare Farbe pro Taste.", 9.5f, muted: true));
             var tests = new FlowLayoutPanel { Dock = DockStyle.Fill, Margin = new Padding(0) };
-            AddButton(tests, "LED aus", async () => await TestLed(0)); AddButton(tests, "LED-Effekt", async () => await TestLed(1));
+            AddButton(tests, "LED aus", async () => await TestLed(0)); AddButton(tests, "Modus 1 testen", async () => await TestLed(1)); AddButton(tests, "Modus 2 testen", async () => await TestLed(2));
             AddButton(tests, "Anleitung", () => {
                 string doc = Path.Combine(AppContext.BaseDirectory, "README.md");
                 try { Process.Start(new ProcessStartInfo(doc) { UseShellExecute = true }); } catch (Exception e) { Note("Anleitung nicht geöffnet: " + e.Message); }

@@ -59,6 +59,7 @@ namespace CodexPad
             }
             controlEnter.Checked = value.SendWithControlEnter; autoStart.Checked = value.AutoStartWithWindows;
             completionLed.Checked = value.CompletionLed; activateOnLaunch.Checked = value.ActivateOnLaunch; showTaskNotice.Checked = value.ShowTaskNotice;
+            notificationLedMode.SelectedIndex = value.NotificationLedMode - 1;
             UpdateActiveLabels();
         }
         private void UpdateActiveLabels()
@@ -83,10 +84,12 @@ namespace CodexPad
             };
             result.Version = 2; result.SendWithControlEnter = controlEnter.Checked; result.AutoStartWithWindows = autoStart.Checked;
             result.CompletionLed = completionLed.Checked; result.ActivateOnLaunch = activateOnLaunch.Checked; result.ShowTaskNotice = showTaskNotice.Checked;
+            result.NotificationLedMode = notificationLedMode.SelectedIndex + 1;
             return result;
         }
         private static void ValidateConfig(Config value)
         {
+            if (value.NotificationLedMode != 1 && value.NotificationLedMode != 2) throw new ArgumentException("LED-Modus muss 1 oder 2 sein.");
             if (value.Bindings == null || value.Bindings.Count != 6) throw new ArgumentException("Genau sechs Belegungen sind erforderlich.");
             var used = new HashSet<string>();
             foreach (var b in value.Bindings) {
@@ -261,9 +264,9 @@ namespace CodexPad
                 foreach (var t in pending) unreadTasks.Items.Add("Ungelesenes Ergebnis · " + t.title);
                 if (pending.Count == 0) unreadTasks.Items.Add(current.led_known ? "Keine fertigen ungelesenen Ergebnisse." : "Lesestatus oder Aufgabenstatus derzeit nicht vollständig verfügbar.");
                 unreadTasks.EndUpdate();
-                int desired = ledPolicy.Desired(config.CompletionLed, current.led_known, pending.Count > 0, DateTime.UtcNow);
+                int desired = ledPolicy.Desired(config.CompletionLed, current.led_known, pending.Count > 0, DateTime.UtcNow, config.NotificationLedMode);
                 ledState.Text = !config.CompletionLed ? "LED-Automatik ausgeschaltet" : current.led_known ?
-                    "LED: " + (desired == 1 ? "Ergebnis bereit · " + pending.Count + " ungelesen" : "aus · alles gelesen oder noch in Arbeit") : "LED: Status unbekannt · nach 15 Sekunden ohne gültige Daten aus";
+                    "LED: " + (desired != 0 ? "Modus " + config.NotificationLedMode + " · Ergebnis bereit · " + pending.Count + " ungelesen" : "aus · alles gelesen oder noch in Arbeit") : "LED: Status unbekannt · nach 15 Sekunden ohne gültige Daten aus";
                 if (current.error != null && lastStatusError != current.error) { Note(current.error); lastStatusError = current.error; }
                 if (current.error == null) lastStatusError = null;
                 if (connected && DateTime.UtcNow >= ledTestUntil) {
@@ -274,7 +277,7 @@ namespace CodexPad
                 if (IsDisposed) return;
                 snapshot = null;
                 ledState.Text = "LED: Status unbekannt · Statusdienst wird erneut geprüft";
-                int desired = ledPolicy.Desired(config.CompletionLed, false, false, DateTime.UtcNow);
+                int desired = ledPolicy.Desired(config.CompletionLed, false, false, DateTime.UtcNow, config.NotificationLedMode);
                 if (lastStatusError != error.Message) { Note(error.Message); lastStatusError = error.Message; }
                 if (DateTime.UtcNow >= ledTestUntil) { try { await ApplyLed(desired); } catch { appliedLed = null; } }
             } finally { statusBusy = false; }
