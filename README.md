@@ -25,6 +25,12 @@ Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstüt
 
 ## Loslegen
 
+**Neu hier? → [Schritt-für-Schritt-Anleitung für deinen PC](docs/ERSTE-SCHRITTE.md)**
+
+[Windows-App herunterladen](https://github.com/cha978rlie/CodexPad/releases/download/v0.3.0/CodexPad-0.3.0-win-x64.zip) · Vollständig entpacken und `CodexPad.exe` öffnen.
+
+**Hinweis:** Der Windows-Download 0.3.0 enthält noch keine LED-Modus-Auswahl. Diese ist bereits im aktuellen Quellcode enthalten.
+
 1. Das Windows-ZIP vollständig in einen beschreibbaren Ordner entpacken, z. B. unter Dokumente. Nicht direkt im ZIP starten.
 2. `CodexPad.exe` öffnen. Python und .NET sind im Paket enthalten. Es ist kein zusätzlicher Treiber nötig.
 3. Codex/Work öffnen und das Pad anschließen.
