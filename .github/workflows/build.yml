@@ -1,0 +1,29 @@
+name: Windows build and tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Python tests
+        run: python -m unittest test_pad_protocol test_pad_status test_pad_backend
+      - name: Build
+        shell: pwsh
+        run: ./build.ps1
+      - name: Application logic tests
+        shell: pwsh
+        run: |
+          $process = Start-Process ./artifacts/app/CodexPad.exe -ArgumentList '--logic-test' -PassThru -Wait
+          if ($process.ExitCode -ne 0) { throw 'Application tests failed' }
+          Get-Content ./artifacts/app/Product-Testresultat.txt

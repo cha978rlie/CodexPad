@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>CodexPad</AssemblyName>
+    <StartupObject>CodexPad.Program</StartupObject>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <Version>0.3.0</Version>
+    <Product>CodexPad</Product>
+    <Description>Community macropad companion for Windows</Description>
+    <ApplicationIcon Condition="Exists('assets/codexpad.ico')">assets/codexpad.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CodexPad.cs" />
+    <Compile Include="PadTest.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProductCore.cs" />
+    <Compile Include="ProductUi.cs" />
+    <Compile Include="ProductTests.cs" />
+    <Compile Include="ChatScroller.cs" />
+    <Compile Include="DesignUi.cs" />
+    <Compile Include="PadTheme.cs" />
+  </ItemGroup>
+</Project>
