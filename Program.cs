@@ -19,6 +19,11 @@ namespace CodexPad
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 string config = Path.Combine(folder, "codexpad-config.json");
+                if (args.Contains("--refresh-autostart")) {
+                    var settings = SettingsStore.Read(config);
+                    AutoStart.Update(settings.AutoStartWithWindows, Path.Combine(folder, "CodexPad.exe"));
+                    return 0;
+                }
                 if (args.Contains("--logic-test")) {
                     File.WriteAllText(Path.Combine(folder, "Product-Testresultat.txt"), ProductTests.Run());
                     return 0;
@@ -51,6 +56,7 @@ namespace CodexPad
                 bool created;
                 using (var single = new Mutex(true, "Local\\CodexPad", out created)) {
                     if (!created) {
+                        if (args.Contains("--autostart")) return 0;
                         for (int attempt = 0; attempt < 10; attempt++) {
                             try { using var signal = EventWaitHandle.OpenExisting(args.Contains("--diagnostics") ? "Local\\CodexPad.Diagnostics" : "Local\\CodexPad.Show"); signal.Set(); return 0; }
                             catch (WaitHandleCannotBeOpenedException) { Thread.Sleep(100); }
@@ -72,7 +78,7 @@ namespace CodexPad
                 return 0;
             } catch (Exception error) {
                 File.WriteAllText(Path.Combine(folder, check ? "Build-Testresultat.txt" : "CodexPad-Startfehler.txt"), error.ToString());
-                if (!check && !args.Contains("--logic-test")) MessageBox.Show(error.Message, "CodexPad – Startfehler");
+                if (!check && !args.Contains("--logic-test") && !args.Contains("--refresh-autostart")) MessageBox.Show(error.Message, "CodexPad – Startfehler");
                 return 1;
             }
         }

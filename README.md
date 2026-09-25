@@ -6,7 +6,7 @@
 
 CodexPad verbindet ein USB-Macropad mit Codex/Work auf Windows: Aufgaben wechseln, diktieren, Nachrichten senden, scrollen und eigene Tastenkürzel auslösen. Die App läuft lokal im Hintergrund.
 
-**0.3.1 Preview · Windows x64 · MIT**
+**0.3.2 Preview · Windows x64 · MIT**
 
 Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstützt; kein Ersatz für die offizielle Codex-Micro-Hardware.
 
@@ -20,16 +20,16 @@ Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstüt
 - **Diktat umschalten:** direkt über „Diktieren“ und „Diktat beenden“ im Nachrichtenfeld.
 - **Zwei Scrollvarianten:** normales Mausrad oder gezielt im Codex-Chat, ohne den Zeiger zu verschieben.
 - **LED-Ergebnisanzeige:** Modus 1 oder 2 wählen, solange fertige Ergebnisse ungelesen sind.
-- **Hintergrundbetrieb:** X versteckt die App. Erneutes Starten zeigt dieselbe Instanz.
+- **Hintergrundbetrieb:** X versteckt die App. Erneutes Starten zeigt dieselbe Instanz. Auf Wunsch startet sie nach der Windows-Anmeldung automatisch.
 - **Sichern und übertragen:** Einstellungen importieren/exportieren; Sicherung vor jeder Übernahme.
 
 ## Loslegen
 
 **Neu hier? → [Schritt-für-Schritt-Anleitung für deinen PC](docs/ERSTE-SCHRITTE.md)**
 
-[Windows-App herunterladen](https://github.com/cha978rlie/CodexPad/releases/download/v0.3.1/CodexPad-0.3.1-win-x64.zip) · Vollständig entpacken und `CodexPad.exe` öffnen.
+[Windows-App herunterladen](https://github.com/cha978rlie/CodexPad/releases/download/v0.3.2/CodexPad-0.3.2-win-x64.zip) · Vollständig entpacken und `CodexPad.exe` öffnen.
 
-**Neu in 0.3.1:** LED-Modus 1 oder 2 auswählen; ruhigeres Design und eine schnellere Belegungsseite. Die optionale Aufgaben-Einblendung ist bei neuen Installationen ausgeschaltet.
+**Neu in 0.3.2:** Der Windows-Autostart wird zusätzlich als verzögerte Anmeldeaufgabe eingerichtet und funktioniert auch im Akkubetrieb.
 
 1. Das Windows-ZIP vollständig in einen beschreibbaren Ordner entpacken, z. B. unter Dokumente. Nicht direkt im ZIP starten.
 2. `CodexPad.exe` öffnen. Python und .NET sind im Paket enthalten. Es ist kein zusätzlicher Treiber nötig.
@@ -37,7 +37,7 @@ Ein unabhängiges Community-Projekt. Nicht von OpenAI entwickelt oder unterstüt
 4. Bei einem **neuen kompatiblen Pad** unter **Gerät & Hilfe → Pad einrichten** die Hinweise lesen. Das überschreibt die sechs Hardwarebelegungen mit F13–F18. Die Software kann vorherige Hardwarebelegungen nicht auslesen oder sichern.
 5. **Eingaben testen**, anschließend **Belegung → Übernehmen** und auf der Übersicht **Aktivieren**.
 
-Autostart, automatische Aktivierung und LED-Kopplung sind bei einer neuen Installation zunächst ausgeschaltet. Du entscheidest selbst, welche Funktionen aktiv werden.
+Autostart, automatische Aktivierung und LED-Kopplung sind bei einer neuen Installation zunächst ausgeschaltet. Du entscheidest selbst, welche Funktionen aktiv werden. Beim Aktivieren des Autostarts legt CodexPad einen Eintrag im Benutzer-Autostart und eine Anmeldeaufgabe mit 20 Sekunden Verzögerung an. Die App startet im Hintergrund und bleibt über das Symbol neben der Uhr erreichbar. Deaktivieren entfernt beide Einträge.
 
 ## Unterstützte Hardware
 

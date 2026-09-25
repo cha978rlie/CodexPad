@@ -13,11 +13,11 @@ Python, .NET und die benötigten Programmdateien sind im Windows-ZIP enthalten. 
 
 ## 2. Die richtige Datei herunterladen
 
-Öffne die [Release-Seite](https://github.com/cha978rlie/CodexPad/releases/tag/v0.3.1) und lade unter **Assets** die Datei **CodexPad-0.3.1-win-x64.zip** herunter.
+Öffne die [Release-Seite](https://github.com/cha978rlie/CodexPad/releases/tag/v0.3.2) und lade unter **Assets** die Datei **CodexPad-0.3.2-win-x64.zip** herunter.
 
-**Source code** und **CodexPad-0.3.1-source.zip** enthalten den Quellcode für Entwickler. Zum normalen Starten brauchst du das **win-x64.zip**.
+**Source code** und **CodexPad-0.3.2-source.zip** enthalten den Quellcode für Entwickler. Zum normalen Starten brauchst du das **win-x64.zip**.
 
-**Versionshinweis:** Der Windows-Download 0.3.1 enthält die Auswahl zwischen LED-Modus 1 und 2. Bei bestehenden Installationen bleibt die bisherige Auswahl erhalten.
+**Versionshinweis:** Der Windows-Download 0.3.2 enthält die LED-Modus-Auswahl und den verbesserten Windows-Autostart. Bei bestehenden Installationen bleiben die Einstellungen erhalten.
 
 ## 3. Entpacken und starten
 
@@ -67,7 +67,7 @@ Unter **Belegung** sind diese Optionen bei einer neuen Installation zunächst au
 - **Tasten beim Programmstart aktivieren:** Die Tastensteuerung beim Öffnen automatisch einschalten.
 - **Mit Windows im Hintergrund starten:** CodexPad bei der Windows-Anmeldung starten.
 
-Den gewünschten LED-Modus unter **Benachrichtigungseffekt** wählen. Beide Modi lassen sich unter **Gerät & Hilfe** für zehn Sekunden testen. Die gewünschten Häkchen setzen und **Übernehmen** anklicken. Für den täglichen Betrieb ohne manuelles Einschalten sind die beiden Startoptionen gemeinsam sinnvoll.
+Den gewünschten LED-Modus unter **Benachrichtigungseffekt** wählen. Beide Modi lassen sich unter **Gerät & Hilfe** für zehn Sekunden testen. Die gewünschten Häkchen setzen und **Übernehmen** anklicken. Für den täglichen Betrieb ohne manuelles Einschalten sind die beiden Startoptionen gemeinsam sinnvoll. CodexPad startet etwa 20 Sekunden nach der Anmeldung im Hintergrund. Prüfe das Symbol neben der Uhr; das Programmfenster erscheint dabei nicht automatisch. Auch auf Akku darf die Anmeldeaufgabe starten.
 
 **X** versteckt das Fenster. CodexPad läuft im Hintergrund weiter. Zum Öffnen das Symbol im Infobereich neben der Uhr doppelt anklicken (gegebenenfalls unter dem kleinen Pfeil für ausgeblendete Symbole) oder CodexPad.exe nochmals starten. Vollständig beenden: Rechtsklick auf das Symbol → **Beenden**.
 
@@ -81,6 +81,7 @@ Zum Weitergeben das unveränderte Release-ZIP verwenden. Der bereits benutzte Pr
 
 | Problem | Das kannst du prüfen |
 |---|---|
+| App nach der Anmeldung nicht sichtbar | Sie startet im Hintergrund: Symbol neben der Uhr prüfen oder CodexPad.exe erneut öffnen. Wenn sie nicht läuft, den Autostart-Schalter in **Belegung** einmal aus- und wieder einschalten und jeweils **Übernehmen** wählen. |
 | Pad nicht erkannt | Direkt am PC anschließen, anderes Datenkabel oder anderen USB-Port testen; **Pad prüfen** öffnen. |
 | Tasten reagieren nicht | Auf der Übersicht **Aktivieren** wählen; danach bei Bedarf **Eingaben testen**. |
 | Tasten schreiben nur denselben Buchstaben | Hardwarebelegung eines neuen kompatiblen Pads über **Pad einrichten** setzen. |
@@ -88,6 +89,6 @@ Zum Weitergeben das unveränderte Release-ZIP verwenden. Der bereits benutzte Pr
 | LED bleibt aus | LED-Option einschalten und übernehmen; Status auf der Übersicht ansehen; LED-Test unter **Gerät & Hilfe** nutzen. |
 | „Status unbekannt“ | Die lokale Codex-Statusquelle ist nicht zuverlässig verfügbar. Nach 15 Sekunden wird die LED ausgeschaltet. |
 | Nur eine EXE kopiert / Dateien fehlen | Das vollständige Windows-ZIP erneut in einen eigenen Ordner entpacken. |
-| Die LED-Modus-Auswahl fehlt | Prüfen, ob tatsächlich der Windows-Download 0.3.1 entpackt wurde. |
+| Die LED-Modus-Auswahl fehlt | Prüfen, ob tatsächlich der Windows-Download 0.3.2 entpackt wurde. |
 
 Weitere Grenzen stehen im [README](../README.md). Für einen Fehlerbericht genügen zunächst App-Version, Windows-Version, Pad-Modell und eine kurze Beschreibung. Keine privaten Aufgabenprotokolle oder vollständigen Codex-Datenbanken öffentlich hochladen.

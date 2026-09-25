@@ -79,7 +79,7 @@ namespace CodexPad
                 int page = i; navigation[i] = new PadButton { Text = names[i], Symbol = icons[i], Width = 175, Height = 44, Margin = new Padding(0, 0, 0, 10) };
                 navigation[i].Click += (s, e) => SelectPage(page); nav.Controls.Add(navigation[i]);
             }
-            var footer = TextLabel("WINDOWS · LOKAL\n0.3.1 Preview\n\nCommunity-Projekt\nKeine offizielle OpenAI-App", 8.5f, muted: true); footer.Dock = DockStyle.Bottom; footer.Height = 100;
+            var footer = TextLabel("WINDOWS · LOKAL\n0.3.2 Preview\n\nCommunity-Projekt\nKeine offizielle OpenAI-App", 8.5f, muted: true); footer.Dock = DockStyle.Bottom; footer.Height = 100;
             rail.Controls.Add(nav); rail.Controls.Add(brand); rail.Controls.Add(footer); shell.Controls.Add(rail);
             var main = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, ColumnCount = 1, Padding = new Padding(24, 22, 24, 14), Margin = new Padding(0) };
             main.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); main.RowStyles.Add(new RowStyle(SizeType.Absolute, 44));

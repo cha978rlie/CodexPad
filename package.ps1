@@ -1,6 +1,6 @@
 param([string]$OutputDirectory = (Join-Path $PSScriptRoot 'dist'))
 $ErrorActionPreference = 'Stop'
-$version = '0.3.1'
+$version = '0.3.2'
 $pythonVersion = '3.13.15'
 $pythonHash = 'D1F04D990AEE1253D8569E8E5104E30FA9F5FA830899F14843448872D936A2CF'
 $stageRoot = Join-Path $PSScriptRoot ('.build\package-' + [guid]::NewGuid().ToString('N'))
@@ -19,7 +19,7 @@ $env:NUGET_PACKAGES = Join-Path $PSScriptRoot '.build\packages'
 & $sdk publish (Join-Path $PSScriptRoot 'CodexPad.csproj') -c Release -o $app -p:NuGetAudit=false -p:DebugType=None -p:DebugSymbols=false "-p:PathMap=$PSScriptRoot=/_/CodexPad"
 if ($LASTEXITCODE -ne 0) { throw 'Build failed.' }
 $helpers = @('pad_backend.py','pad_status.py','pad_hid.py','pad_led.py','pad_device.py')
-$sources = @('CodexPad.cs','ProductUi.cs','ProductCore.cs','ProductTests.cs','Program.cs','PadTest.cs','ChatScroller.cs','DesignUi.cs','PadTheme.cs','CodexPad.csproj','package.ps1','.gitignore','LICENSE','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md','SECURITY.md','test_pad_protocol.py','test_pad_status.py','test_pad_backend.py','CodexPad starten.cmd','LED testen.cmd','Pad testen.cmd') + $helpers
+$sources = @('CodexPad.cs','AutoStart.cs','ProductUi.cs','ProductCore.cs','ProductTests.cs','Program.cs','PadTest.cs','ChatScroller.cs','DesignUi.cs','PadTheme.cs','CodexPad.csproj','package.ps1','.gitignore','LICENSE','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md','SECURITY.md','test_pad_protocol.py','test_pad_status.py','test_pad_backend.py','CodexPad starten.cmd','LED testen.cmd','Pad testen.cmd') + $helpers
 foreach ($file in $sources) { Copy-Item -LiteralPath (Join-Path $PSScriptRoot $file) -Destination $source }
 Copy-Item -LiteralPath $publicBuild -Destination (Join-Path $source 'build.ps1')
 $readme = Join-Path $PSScriptRoot 'publishing\README.md'

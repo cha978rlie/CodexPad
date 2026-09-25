@@ -266,14 +266,12 @@ namespace CodexPad
         {
             using (RegistryKey run = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run")) {
                 if (run == null) throw new InvalidOperationException("Windows-Autostart-Einstellungen sind nicht erreichbar.");
-                if (!config.AutoStartWithWindows) { run.DeleteValue("CodexPad", false); return; }
                 string program = Process.GetCurrentProcess().MainModule.FileName;
-                string script = Path.Combine(Path.GetDirectoryName(configPath), "CodexPad.ps1");
-                string command = Path.GetFileName(program).Equals("CodexPad.exe", StringComparison.OrdinalIgnoreCase)
-                    ? "\"" + program + "\" --autostart"
-                    : "\"" + program + "\" -NoProfile -STA -WindowStyle Hidden -File \"" + script + "\" -Autostart";
-                run.SetValue("CodexPad", command, RegistryValueKind.String);
+                if (config.AutoStartWithWindows)
+                    run.SetValue("CodexPad", "\"" + program + "\" --autostart", RegistryValueKind.String);
+                else run.DeleteValue("CodexPad", false);
             }
+            AutoStart.Update(config.AutoStartWithWindows, Process.GetCurrentProcess().MainModule.FileName);
         }
 
         private void StopListening()
